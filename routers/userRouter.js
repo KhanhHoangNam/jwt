@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {insertUser} = require('../database/models/User')
+const {insertUser, activateUser} = require('../database/models/User')
 
 router.use((req, res, next) => {
     console.log('Time: ', Date.now()) //Time log
@@ -19,6 +19,17 @@ router.post('/registerUser', async (req, res) => {
             result: "failed",
             message: `Không thể đăng kí thêm user. Lỗi: ${error}`
         })
+    }
+})
+//
+router.get('/activateUser', async(req, res) => {
+    let {email, secretKey} = req.query
+    try {
+        await activateUser(email, secretKey)
+        res.send(`<h1 style="color:MediumSeaGreen;">Kích hoạt User thành công</h1>`)
+        
+    } catch (error) {
+        res.send(`<h1 style="color:Red;">Không kích hoạt được User. Lỗi: ${error}</h1>`)
     }
 })
 module.exports = router

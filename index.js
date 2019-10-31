@@ -5,7 +5,7 @@
  */
 const express = require('express')
 const app = express()
-const PORT = 3000
+const {PORT} = require('./helpers/utility')
 //Nhúng middleware body-parser vào Express
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())

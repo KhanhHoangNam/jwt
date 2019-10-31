@@ -1,5 +1,6 @@
 const {mongoose} = require('../database')
 const bcrypt = require('bcrypt')
+const {sendEmail} = require('../../helpers/utility')
 const {Schema} = mongoose
 const UserSchema = new Schema({
     //schema: cấu trúc của một collection
@@ -20,6 +21,7 @@ const insertUser = async (name, email, password) => {
         newUser.email = email
         newUser.password = encryptedPassword
         await newUser.save()
+        await sendEmail(email, encryptedPassword)
     } catch (error) {
         //Tùy biến lại error
         if(error.code === 11000) {
@@ -27,8 +29,27 @@ const insertUser = async (name, email, password) => {
         }
     }
 }
-
+//
+const activateUser = async (email, secretKey) => {
+    try {
+        let foundUser = await User.findOne({
+            email, password: secretKey
+        }).exec()
+        if(!foundUser) {
+            throw "Không tìm thấy User để kích hoạt"
+        }
+        if(foundUser.active === 0) {
+            foundUser.active = 1
+            await foundUser.save()
+        } else {
+            throw "User đã kích hoạt"
+        }
+    } catch (error) {
+        throw error
+    }
+}
 module.exports = {
     User,
-    insertUser
+    insertUser,
+    activateUser
 }
