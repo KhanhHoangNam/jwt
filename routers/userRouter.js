@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {insertUser, activateUser, loginUser} = require('../database/models/User')
+const {insertUser, activateUser, loginUser, verifyJWT} = require('../database/models/User')
 
 router.use((req, res, next) => {
     console.log('Time: ', Date.now()) //Time log
@@ -46,6 +46,23 @@ router.post('/loginUser', async(req, res) => {
         res.json({
             result: "failed",
             message: `Đăng nhập không thành công. Lỗi ${error}`
+        })
+    }
+})
+//
+router.get('/jwtTest', async(req, res) => {
+    let tokenKey = req.headers['x-access-token']
+    try {
+        //Verify token
+        await verifyJWT(tokenKey)
+        res.json({
+            result: 'sucess',
+            message: 'Verify Json Web Token thành công'
+        })
+    } catch (error) {
+        res.json({
+            result: "failed",
+            message: `Lỗi kiểm tra token. Lỗi ${error}`
         })
     }
 })

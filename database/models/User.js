@@ -79,9 +79,25 @@ const loginUser = async (email, password) => {
         throw error
     }
 }
+//
+const verifyJWT = async (tokenKey) => {
+    try {
+        let decodedJson = await jwt.verify(tokenKey, secretString)
+        if(Date.now() / 1000 > decodedJson.exp) {
+            throw "Token hết hạn, mời bạn login lại"
+        }
+        let foundUser = await User.findById(decodedJson.id)
+        if(!foundUser) {
+            throw "Không tìm thấy User với token này"
+        }
+    } catch (error) {
+        throw error
+    }
+}
 module.exports = {
     User,
     insertUser,
     activateUser,
-    loginUser
+    loginUser,
+    verifyJWT
 }
