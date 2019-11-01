@@ -1,6 +1,8 @@
 const {mongoose} = require('../database')
 const bcrypt = require('bcrypt')
 const {sendEmail} = require('../../helpers/utility')
+const jwt = require('jsonwebtoken')
+const secretString = "secret string"
 const {Schema} = mongoose
 const UserSchema = new Schema({
     //schema: cấu trúc của một collection
@@ -48,8 +50,38 @@ const activateUser = async (email, secretKey) => {
         throw error
     }
 }
+//Viết hàm login User
+const loginUser = async (email, password) => {
+    try {
+        let foundUser = await User.findOne({email: email.trim()})
+                            .exec()
+        if(!foundUser) {
+            throw "User không tồn tại"
+        }
+        if(foundUser.active === 0) {
+            throw "User chưa kích hoạt, bạn phải mở mail kích hoạt trước"               
+        }
+        let encryptedPassword = foundUser.password
+        let checkPassword = await bcrypt.compare(password, encryptedPassword)
+        if (checkPassword === true) {
+            //Đăng nhập thành công
+            let jsonObject = {
+                id: foundUser._id
+            }
+
+            let tokenKey = await jwt.sign(jsonObject, 
+                                secretString, {
+                                expiresIn: 86400 // Expire trong 24 giờ
+                                })
+            return tokenKey
+        }
+    } catch(error) {
+        throw error
+    }
+}
 module.exports = {
     User,
     insertUser,
-    activateUser
+    activateUser,
+    loginUser
 }
