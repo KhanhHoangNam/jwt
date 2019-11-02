@@ -12,7 +12,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}));
 //Tùy biến Router
 const usersRouter = require('./routers/userRouter')
+const blogPostRouter = require('./routers/blogPostRouter')
 app.use('/users', usersRouter)
+app.use('/blogPosts', blogPostRouter)
 //Start Server
 app.listen(PORT, () => {
     console.log(`Server is listening on port: ${PORT}`)
