@@ -31,7 +31,7 @@ const insertUser = async (name, email, password) => {
         if(error.code === 11000) {
             throw "Tên hoặc email đã tồn tại"
         }
-    }
+    }    
 }
 //
 const activateUser = async (email, secretKey) => {
