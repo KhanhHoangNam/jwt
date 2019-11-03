@@ -20,6 +20,9 @@ const insertBlogPost = async(title, content, tokenKey) => {
     try {
         //Kiểm tra đăng nhập = có tokenKey "còn hạn" không?
         let signedInUser = await verifyJWT(tokenKey)
+        if(!signedInUser) {
+            throw "Token không được phép"
+        }
         let newBlogPost = await BlogPost.create({
             title, content,
             date: Date.now(),
@@ -135,6 +138,15 @@ const deleteBlogPost = async(blogPostId, tokenKey) =>{
         }
     } catch (error) {
         throw error
+    }    
+}
+const deleteBlogPostsByAuthor = async (authorId) => {
+    try {
+        await BlogPost.deleteMany({
+            author: authorId
+        })
+    } catch (error) {
+        throw error
     }
 }
 module.exports = {
@@ -144,5 +156,6 @@ module.exports = {
     queryBlogPostsByDateRange,
     getDetailBlogPost,
     updateBlogPost,
-    deleteBlogPost
+    deleteBlogPost,
+    deleteBlogPostsByAuthor
 }

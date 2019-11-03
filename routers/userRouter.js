@@ -1,6 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const {insertUser, activateUser, loginUser, verifyJWT} = require('../database/models/User')
+const {insertUser,
+       activateUser,
+       loginUser,
+       verifyJWT,
+       blockOrDeleteUsers
+    } = require('../database/models/User')
 
 router.use((req, res, next) => {
     console.log('Time: ', Date.now()) //Time log
@@ -63,6 +68,24 @@ router.get('/jwtTest', async(req, res) => {
         res.json({
             result: "failed",
             message: `Lỗi kiểm tra token. Lỗi ${error}`
+        })
+    }
+})
+//blockOrDeleteUsers
+router.post('/admin/blockOrDeleteUsers', async (req, res) => {
+    let tokenKey = req.headers['x-access-token']
+    let {userIds, actionType} = req.body
+    userIds = userIds.split(',') //Biến string thành array
+    try {
+        await blockOrDeleteUsers(userIds, tokenKey, actionType)
+        res.json({
+            result: "success",
+            message: "Block/delete user thành công"
+        })
+    } catch (error) {
+        res.json({
+            result: "failed",
+            message: `Lỗi block/delete user. Error: ${error}`
         })
     }
 })
