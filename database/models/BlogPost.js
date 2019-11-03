@@ -19,7 +19,7 @@ const BlogPost = mongoose.model('BlogPost', BlogPostSchema)
 const insertBlogPost = async(title, content, tokenKey) => {
     try {
         //Kiểm tra đăng nhập = có tokenKey "còn hạn" không?
-        let signedInUser = await verifyJWT(tokenKey)
+        let signedInUser = await verifyJWT(tokenKey)        
         if(!signedInUser) {
             throw "Token không được phép"
         }

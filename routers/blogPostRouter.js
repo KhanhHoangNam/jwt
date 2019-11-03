@@ -33,7 +33,6 @@ router.post('/insertBlogPost', async (req, res) => {
             message: `Không thể thêm mới BlogPost. Lỗi: ${error}`
         })
     }
-    debugger
 })
 router.get('/queryBlogPosts', async(req, res) => {
     let {text} = req.query

@@ -91,7 +91,6 @@ const loginUser = async (email, password) => {
         } else {
             throw "Bạn nhập sai passoword"
         }
-        debugger
     } catch(error) {
         throw error
     }
@@ -104,12 +103,13 @@ const verifyJWT = async (tokenKey) => {
             throw "Token hết hạn, mời bạn login lại"
         }
         let foundUser = await User.findById(decodedJson.id)
-        if(foundUser.isBanned ===1) {
+        if(foundUser.isBanned === 1) {
             throw "User đã bị khóa tài khoản, do vi phạm điều khoản"
         }
         if(!foundUser) {
             throw "Không tìm thấy User với token này"
         }
+        debugger
         return foundUser
     } catch (error) {
         throw error
