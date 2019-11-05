@@ -11,7 +11,7 @@ const {
     getDetailBlogPost,
     updateBlogPost,
     deleteBlogPost
-} = require('../database/models/BlogPost')
+} = require('../services/BlogPostService')
 router.use((req, res, next) => {
     console.log('Time: ', Date.now()) //Timelog
     next()

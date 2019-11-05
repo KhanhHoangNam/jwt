@@ -5,7 +5,7 @@ const {insertUser,
        loginUser,
        verifyJWT,
        blockOrDeleteUsers
-    } = require('../database/models/User')
+    } = require('../services/UserService')
 
 router.use((req, res, next) => {
     console.log('Time: ', Date.now()) //Time log
