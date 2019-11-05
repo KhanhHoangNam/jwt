@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "cda39199-82e7-49aa-a54f-5e80d6d42f0e",
+		"name": "jwt",
+		"description": "Using jwt for authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "insertBlogPost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYmU5OTFmMjljMjVlNDg1NGNhNDgwZSIsImlhdCI6MTU3Mjc3MjIwMSwiZXhwIjoxNTcyODU4NjAxfQ.-7T1DA75zGUmpAUnrqHDLyXZmkhQYNH0RIdTdSPk3Tc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Software Engineering",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Software Engineering is so convinent",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{API_URL}}/blogPosts/insertBlogPost",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"blogPosts",
+						"insertBlogPost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verifyToken",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYmU5OTFmMjljMjVlNDg1NGNhNDgwZSIsImlhdCI6MTU3Mjc3Mjg4NywiZXhwIjoxNTcyODU5Mjg3fQ.Ui9wMt6c2re7io5L-zTHEH93rkYRL0xp28O_f-xeBbI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{API_URL}}/users/jwtTest",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"jwtTest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "mailtest",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "mail.test.123.bfcs@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Kh@nhproth95",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{API_URL}}/users/registerUser",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"registerUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loginUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "mail.test.123.bfcs@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Kh@nhproth95",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{API_URL}}/users/loginUser",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"loginUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryBlogPosts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{API_URL}}/blogPosts/queryBlogPosts?text=youtube",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"blogPosts",
+						"queryBlogPosts"
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "youtube"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryBlogPostsByDateRange",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{API_URL}}/blogPosts/queryBlogPostsByDateRange?from=28-10-2019&to=03-11-2019",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"blogPosts",
+						"queryBlogPostsByDateRange"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "28-10-2019"
+						},
+						{
+							"key": "to",
+							"value": "03-11-2019"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDetailBlogPost",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{API_URL}}/blogPosts/getDetailBlogPost?blogPostId=5db715fcde7a9e29e6683bc5",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"blogPosts",
+						"getDetailBlogPost"
+					],
+					"query": [
+						{
+							"key": "blogPostId",
+							"value": "5db715fcde7a9e29e6683bc5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateBlogPost",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYmQyMzJkNWZkZmRjMWYyYzNhMDMxOSIsImlhdCI6MTU3MjY3NjU1MCwiZXhwIjoxNTcyNzYyOTUwfQ.GMGu4-ukUF-LWFJEoV4LSFbQsTjrMTDJbr2X9o9qvCo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "blogPostId",
+							"value": "5dbd28269d243320f89a27c7",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Nodejs + Mongoose",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "This is simple example Nodejs",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{API_URL}}/blogPosts/updateBlogPost",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"blogPosts",
+						"updateBlogPost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBlogPost",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYmQyMzJkNWZkZmRjMWYyYzNhMDMxOSIsImlhdCI6MTU3MjY3NjU1MCwiZXhwIjoxNTcyNzYyOTUwfQ.GMGu4-ukUF-LWFJEoV4LSFbQsTjrMTDJbr2X9o9qvCo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "blogPostId",
+							"value": "5dbd28269d243320f89a27c7",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{API_URL}}/blogPosts/deleteBlogPost",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"blogPosts",
+						"deleteBlogPost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activateUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{API_URL}}/users/activateUser?email=tata.phunganh1997@gmail.com&secretKey=$2b$10$V4GDuRcIHDkzsIN7K66Tv.7E0xPXAqAvK5J12o77myhzBj/Tr8cIy",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"activateUser"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "tata.phunganh1997@gmail.com"
+						},
+						{
+							"key": "secretKey",
+							"value": "$2b$10$V4GDuRcIHDkzsIN7K66Tv.7E0xPXAqAvK5J12o77myhzBj/Tr8cIy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/blockOrDeleteUsers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYmU5NmE1MjljMjVlNDg1NGNhNDgwYyIsImlhdCI6MTU3Mjc3MTYyMCwiZXhwIjoxNTcyODU4MDIwfQ.To2fBQi5S9VcYicQEbD3lKkAeYZ8ylEfXO4LXWfs51w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "actionType",
+							"value": "ACTION_DELETE_USER",
+							"type": "text"
+						},
+						{
+							"key": "userIds",
+							"value": "5dbe964f29c25e4854ca480b,5dbe981e29c25e4854ca480d",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{API_URL}}/users/admin/blockOrDeleteUsers",
+					"protocol": "http",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"admin",
+						"blockOrDeleteUsers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
