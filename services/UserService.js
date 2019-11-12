@@ -74,7 +74,7 @@ const loginUser = async (email, password) => {
                                 })
             return tokenKey
         } else {
-            throw "Bạn nhập sai passoword"
+            throw "Bạn nhập sai password"
         }
     } catch(error) {
         throw error

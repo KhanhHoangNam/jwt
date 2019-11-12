@@ -40,6 +40,7 @@ router.get('/activateUser', async(req, res) => {
 })
 //
 router.post('/loginUser', async(req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     let {email, password} = req.body
     try {
         let tokenKey = await loginUser(email, password)    
