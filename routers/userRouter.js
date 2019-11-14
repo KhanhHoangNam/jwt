@@ -43,11 +43,11 @@ router.post('/loginUser', async(req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     let {email, password} = req.body
     try {
-        let tokenKey = await loginUser(email, password)    
+        let data = await loginUser(email, password)    
         res.json({
             result: "success",
             message: "Đăng nhập thành công",        
-            tokenKey
+            data
         })             
     } catch (error) {
         res.json({

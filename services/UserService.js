@@ -72,7 +72,10 @@ const loginUser = async (email, password) => {
                                 secretString, {
                                 expiresIn: 86400 // Expire trong 24 giờ
                                 })
-            return tokenKey
+            let data = foundUser.toObject();
+            data.tokenKey = tokenKey
+            debugger
+            return data
         } else {
             throw "Bạn nhập sai password"
         }
@@ -93,8 +96,7 @@ const verifyJWT = async (tokenKey) => {
         }
         if(!foundUser) {
             throw "Không tìm thấy User với token này"
-        }
-        debugger
+        }        
         return foundUser
     } catch (error) {
         throw error
